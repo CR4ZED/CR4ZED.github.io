@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+<!-- <!DOCTYPE html>
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
@@ -13,5 +13,39 @@
     <p>Hello <span id="username"></span></p>
     <button id="changeUser">change user</button>
     <script src="/scripts/script.js"></script>
+  </body>
+</html>
+ -->
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <script>
+      //api key
+
+      const API_KEY = "VURGLU-JMAS6B-3BRND3-4O84";
+
+      //getSatelitePosition
+
+      async function getSatellitePosition(lat, lng) {
+        console.log("hellooo");
+        const url = `https://api.n2yo.com/rest/v1/satellite/positions/25544/${lat}/${lng}/0/2/&apiKey=${API_KEY}`;
+        const response = await fetch(url, { mode: "cors" });
+        const data = await response.json();
+        return data;
+      }
+
+      navigator.geolocation.getCurrentPosition((data) => {
+        const { latitude, longitude } = data.coords;
+        getSatellitePosition(latitude, longitude)
+          .then((data) => console.log(data))
+          .catch((err) => console.log(err));
+      });
+    </script>
   </body>
 </html>
